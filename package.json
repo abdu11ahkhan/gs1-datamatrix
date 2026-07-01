@@ -1,0 +1,37 @@
+{
+  "name": "gs1-datamatrix-generator",
+  "version": "1.0.0",
+  "description": "Offline GS1 DataMatrix generator for pharmaceutical serialization — Saadat International",
+  "author": "Saadat International",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "31.7.6",
+    "electron-builder": "24.13.3"
+  },
+  "build": {
+    "appId": "com.saadat.gs1datamatrix",
+    "productName": "GS1 DataMatrix Generator",
+    "copyright": "Saadat International",
+    "files": [ "main.js", "app/**/*", "build/icon.ico" ],
+    "directories": { "buildResources": "build", "output": "dist" },
+    "win": {
+      "target": [ { "target": "nsis", "arch": [ "x64" ] } ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "runAfterFinish": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "GS1 DataMatrix Generator",
+      "artifactName": "GS1-DataMatrix-Generator-Setup-${version}.${ext}"
+    }
+  }
+}

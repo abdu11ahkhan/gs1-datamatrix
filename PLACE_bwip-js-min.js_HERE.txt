@@ -1,0 +1,6 @@
+Copy your existing bwip-js-min.js into this folder (app/lib/), replacing this note.
+
+It is the same file already used by your current app. This package does not
+modify the barcode engine, so keep using the exact file you already have.
+
+Final path must be:   app/lib/bwip-js-min.js

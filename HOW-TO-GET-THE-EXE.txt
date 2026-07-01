@@ -1,0 +1,65 @@
+GS1 DATAMATRIX GENERATOR — HOW TO GET THE WINDOWS .EXE
+Saadat International
+========================================================
+
+Building this project produces ONE file:
+      GS1-DataMatrix-Generator-Setup-1.0.0.exe
+That single .exe is what you give your clients. They run it once -> the app
+installs (no admin rights) with the Saadat icon and the name
+"GS1 DataMatrix Generator" on the desktop and Start menu -> double-click ->
+it opens in its own window and works fully offline.
+
+========================================================
+STEP 0 (REQUIRED FOR EITHER ROUTE) — ADD THE BARCODE FILE
+========================================================
+Open  app\lib\  , delete the note "PLACE_bwip-js-min.js_HERE.txt", and put
+your existing bwip-js-min.js there instead. Final path must be exactly:
+      app\lib\bwip-js-min.js
+Without this the app opens but cannot draw barcodes.
+
+========================================================
+ROUTE A (RECOMMENDED) — GITHUB BUILDS IT, YOU INSTALL NOTHING
+========================================================
+1.  Go to github.com and create a free account (skip if you have one).
+2.  Click the "+" at top-right -> "New repository". Name it e.g.
+    gs1-datamatrix, choose Private, click "Create repository".
+3.  On the empty page, click the link "uploading an existing file".
+4.  Select EVERYTHING inside this project folder (the app, build and .github
+    folders, plus main.js, package.json, this file) and drag it all into the
+    upload box. Make sure the ".github" folder appears in the list. Scroll down
+    and click the green "Commit changes".
+5.  Click the "Actions" tab. If asked, click
+    "I understand my workflows, go ahead and enable them."
+6.  On the left click "Build Windows installer" -> "Run workflow" -> the green
+    "Run workflow". (If a run already started by itself, just let it finish.)
+7.  Wait ~3 minutes for the green check. Open that run, scroll to "Artifacts",
+    and download "GS1-DataMatrix-Generator-Installer". It's a .zip; inside is
+    your .exe.
+
+========================================================
+ROUTE B — BUILD ON YOUR OWN WINDOWS PC (~5 MINUTES)
+========================================================
+1.  Install Node.js LTS from https://nodejs.org (click Next through it).
+2.  Unzip this project somewhere simple, e.g. C:\gs1
+3.  Add your bwip-js-min.js to app\lib\ (see Step 0).
+4.  Open the folder in File Explorer, click the address bar, type  cmd  and
+    press Enter. A Command Prompt opens in this folder.
+5.  Run:   npm install
+6.  Run:   npm run dist       (first time needs internet; downloads ~200 MB)
+7.  The installer is in the new "dist" folder:
+        dist\GS1-DataMatrix-Generator-Setup-1.0.0.exe
+
+========================================================
+TEST BEFORE SENDING TO THE CLIENT
+========================================================
+Run the .exe once on a Windows PC and confirm: (1) a code generates,
+(2) Save PNG saves a file, (3) Print label shows the label.
+On first run you will see a one-time "Windows protected your PC" box because
+the build is unsigned -> click "More info" -> "Run anyway". The client sees
+this only once per machine, then never again.
+
+========================================================
+UPDATING LATER
+========================================================
+Change "version" in package.json (e.g. 1.0.0 -> 1.0.1) and rebuild. Running the
+new installer updates the client's copy.
